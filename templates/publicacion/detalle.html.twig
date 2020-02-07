@@ -18,7 +18,7 @@
     <ul>
     {% for comentario in publicacion.getComentarios %}
         <li>{{ comentario.getContenido }}</li>
-    {% endblock %}
+    {% endfor %}
     </ul>
     Detalle de publicación
 {% endblock %}

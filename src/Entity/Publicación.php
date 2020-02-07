@@ -24,7 +24,7 @@ class Publicación
     private $fecha;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\categoria", inversedBy="publicaciNs")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Categoria", inversedBy="publicaciNs", fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $categoria;

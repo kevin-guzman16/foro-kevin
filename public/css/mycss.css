@@ -1,0 +1,7 @@
+table td {
+    border: 1px solid gold;
+}
+
+table td:hover {
+    background-color: #7DA0B1;
+}

@@ -1,7 +1,8 @@
-table td {
-    border: 1px solid gold;
+table td, th {
+    border: 1px solid grey;
+    border-collapse: collapse;
 }
 
 table td:hover {
-    background-color: #7DA0B1;
+    background-color: ;
 }

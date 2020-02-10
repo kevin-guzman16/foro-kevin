@@ -12,7 +12,12 @@
 <body>
     <header>
         <img src="" alt="logo">
-        <h1>Foro</h1>
+        <h1  style="display:inline;">Mi super foro!!!</h1>
+        {% if is_granted("ROLE_USER") %}
+            Hola {{ app.user.username }} <a href="/logout">Logout</a>
+        {% else %}
+            <a href="/login">Login</a>
+        {% endif %}
     </header>
 
     {% block navegacion %}{% endblock %}

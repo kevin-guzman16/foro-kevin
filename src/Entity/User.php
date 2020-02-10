@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -37,6 +39,22 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $nombrecompleto;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Publicación", mappedBy="user", orphanRemoval=true)
+     */
+    private $publicacion;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comentarios", mappedBy="user", orphanRemoval=true)
+     */
+    private $comentarios;
+
+    public function __construct()
+    {
+        $this->publicacion = new ArrayCollection();
+        $this->comentarios = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -119,6 +137,68 @@ class User implements UserInterface
     public function setNombrecompleto(?string $nombrecompleto): self
     {
         $this->nombrecompleto = $nombrecompleto;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Publicación[]
+     */
+    public function getPublicacion(): Collection
+    {
+        return $this->publicacion;
+    }
+
+    public function addPublicacion(Publicación $publicacion): self
+    {
+        if (!$this->publicacion->contains($publicacion)) {
+            $this->publicacion[] = $publicacion;
+            $publicacion->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePublicacion(Publicación $publicacion): self
+    {
+        if ($this->publicacion->contains($publicacion)) {
+            $this->publicacion->removeElement($publicacion);
+            // set the owning side to null (unless already changed)
+            if ($publicacion->getUser() === $this) {
+                $publicacion->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comentarios[]
+     */
+    public function getComentarios(): Collection
+    {
+        return $this->comentarios;
+    }
+
+    public function addComentario(Comentarios $comentario): self
+    {
+        if (!$this->comentarios->contains($comentario)) {
+            $this->comentarios[] = $comentario;
+            $comentario->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComentario(Comentarios $comentario): self
+    {
+        if ($this->comentarios->contains($comentario)) {
+            $this->comentarios->removeElement($comentario);
+            // set the owning side to null (unless already changed)
+            if ($comentario->getUser() === $this) {
+                $comentario->setUser(null);
+            }
+        }
 
         return $this;
     }

@@ -27,11 +27,10 @@ class PublicacionController extends AbstractController
     /**
      * @Route("/publicacion/{id}", name="publicacion-detalle")
      */
-    public function detalle(Publicación $publicacion, Comentarios $comentario){
+    public function detalle(Publicación $publicacion){
 
         return $this->render('publicacion/detalle.html.twig', [
-            'publicacion' => $publicacion,
-            'comentario' => $comentario
+            'publicacion' => $publicacion
         ]);
     }
 }
